@@ -17,19 +17,19 @@ export abstract class BaseApiService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   protected get<TData>(url: string, isProtected: boolean = false): Observable<TData> {
-    return this.request('GET', url, isProtected);
+    return this.request<TData>('GET', url, isProtected);
   }
 
   protected post<TData>(url: string, data: TData, isProtected: boolean = false): Observable<TData> {
-    return this.request('POST', url, isProtected, data);
+    return this.request<TData>('POST', url, isProtected, data);
   }
 
   protected put<TData>(url: string, data: TData, isProtected: boolean = false): Observable<TData> {
-    return this.request('GET', url, isProtected, data);
+    return this.request<TData>('GET', url, isProtected, data);
   }
 
   protected delete<TData>(url: string, isProtected: boolean = false): Observable<TData> {
-    return this.request('GET', url, isProtected);
+    return this.request<TData>('GET', url, isProtected);
   }
 
   private request<TData>(method: string, url: string, isProtected: boolean, data?: TData): Observable<TData> {
@@ -40,6 +40,6 @@ export abstract class BaseApiService {
     }
 
     httpOptions.body = data;
-    return this.http.request<TData>(method, `${hostUrl}/${url}`, httpOptions);
+    return this.http.request<TData>(method, `${hostUrl}/api/${url}`, httpOptions);
   }
 }
