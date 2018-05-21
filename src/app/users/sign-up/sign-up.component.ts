@@ -8,6 +8,7 @@ import { SignUpModel } from './sign-up.model';
 })
 export class SignUpComponent implements OnInit {
 
+  readonly roles: string[] = ['user', 'admin'];
   model: SignUpModel;
 
   constructor() { }
@@ -17,6 +18,6 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    alert('Nice');
+    alert(this.model.role);
   }
 }

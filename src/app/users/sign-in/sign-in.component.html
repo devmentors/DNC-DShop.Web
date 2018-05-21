@@ -1,3 +1,24 @@
-<p>
-  sign-in works!
-</p>
+<div class="row">
+    <div class="col-md-2">
+        <h2>Sign in</h2>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <form>
+        <div class="form-group">
+          <label for="sign-up-email">Email</label>
+          <input type="email" class="form-control" id="sign-up-email" [(ngModel)]="model.email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="sign-up-password">Password</label>
+          <input type="password" class="form-control" id="sign-up-password" [(ngModel)]="model.password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <input type="checkbox" [checked]="model.rememberMe" (change)="model.rememberMe = !model.rememberMe"> Remember me
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="signIn()">Sign in</button>
+        </form>
+    </div>
+  </div>

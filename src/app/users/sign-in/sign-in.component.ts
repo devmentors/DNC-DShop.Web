@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SignInModel } from './sign-in.model';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,11 +9,14 @@ import { SignInModel } from './sign-in.model';
 })
 export class SignInComponent implements OnInit {
 
-  private model: SignInModel;
+  model: SignInModel;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.model = new SignInModel();
   }
 
+  signIn() {
+  }
 }

@@ -1,19 +1,31 @@
-<form>
-  <div class="form-group">
-    <label for="sign-up-email">Email address</label>
-    <input type="email" class="form-control" id="sign-up-email" [(ngModel)]="model.email" name="email" placeholder="Email">
+<div class="row">
+  <div class="col-md-2">
+      <h2>Sign up</h2>
   </div>
-  <div class="form-group">
-    <label for="sign-up-password">Password</label>
-    <input type="password" class="form-control" id="sign-up-password" [(ngModel)]="model.password" name="password" placeholder="Password">
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <form>
+      <div class="form-group">
+        <label for="sign-up-email">Email</label>
+        <input type="email" class="form-control" id="sign-up-email" [(ngModel)]="model.email" name="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="sign-up-password">Password</label>
+        <input type="password" class="form-control" id="sign-up-password" [(ngModel)]="model.password" name="password" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="sign-up-confirm-password">Confirm password</label>
+        <input type="password" class="form-control" id="sign-up-confirm-password" [(ngModel)]="model.password" name="confirm-password" placeholder="Confirm password" >
+      </div>
+      <div class="form-group">
+        <label for="sign-up-role">Role</label>
+        <select class="form-control" id="sign-up-role" [(ngModel)]="model.role" name="role">
+          <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="signUp()">Sign in</button>
+    </form>
   </div>
-  <div class="form-group">
-    <label for="sign-up-confirm-password">Confirm password</label>
-    <input type="password" class="form-control" id="sign-up-confirm-password" [(ngModel)]="model.password" name="confirm-password" placeholder="Confirm password" >
-  </div>
-  <div class="form-group">
-    <label for="sign-up-role">Role</label>
-    <input class="form-control" id="sign-up-role" [(ngModel)]="model.role" name="role" readonly>
-  </div>
-  <button type="submit" class="btn btn-primary" (click)="signUp()">Sign in</button>
-</form>
+</div>

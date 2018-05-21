@@ -1,5 +1,10 @@
+import { Injectable } from '@angular/core';
+
 const accessTokenKey = 'access_token';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
   private isSessionStored: boolean;
