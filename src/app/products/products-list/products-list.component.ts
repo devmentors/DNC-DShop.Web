@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PagedResult } from './../../shared/paged-result';
+import { ProductModel } from '../shared/product.model';
+import { ProductsService } from './../shared/products.service';
+
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
@@ -7,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsListComponent implements OnInit {
 
-  constructor() { }
+  productsPage: PagedResult<ProductModel>;
+
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
   }
