@@ -11,7 +11,7 @@ import { ProductsService } from './../shared/products.service';
 })
 export class ProductsListComponent implements OnInit {
 
-  products: ProductModel[];
+  productsPage: PagedResult<ProductModel>;
 
   constructor(private productsService: ProductsService) { }
 
@@ -20,6 +20,8 @@ export class ProductsListComponent implements OnInit {
   }
 
   browse() {
-    this.productsService.browse().subscribe(page => this.products = page);
+    this.productsService
+      .browse()
+      .subscribe(page => this.productsPage = page);
   }
 }

@@ -1,15 +1,5 @@
 <div class="row">
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">
-            <i class="fa fa-search"></i>
-        </span>
-      </div>
-      <input type="text" class="form-control" placeholder="Search...">
-    </div>
-</div>
-<div class="row">
-  <div class="col-md-4 mb-5" *ngFor="let product of products">
+  <div class="col-md-4 mb-5" *ngFor="let product of productsPage.items">
       <div class="card" style="width: 18rem;">
           <img class="card-img-top" src="https://cdn.cultofmac.com/wp-content/uploads/2017/03/iPhone-7-red-1-780x466.png" alt="Card image cap">
           <div class="card-body">

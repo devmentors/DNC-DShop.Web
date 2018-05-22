@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { AuthService } from './../../shared/auth.service';
@@ -17,7 +17,7 @@ export class ProductsService extends BaseApiService {
     super(http, authService);
   }
 
-  browse() : Observable<ProductModel[]> {
-    return super.get<ProductModel[]>('products', false);
+  browse() : Observable<PagedResult<ProductModel>> {
+    return super.pagedResult<ProductModel>('products', false);
   }
 }
