@@ -11,11 +11,15 @@ import { ProductsService } from './../shared/products.service';
 })
 export class ProductsListComponent implements OnInit {
 
-  productsPage: PagedResult<ProductModel>;
+  products: ProductModel[];
 
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
+    this.browse();
   }
 
+  browse() {
+    this.productsService.browse().subscribe(page => this.products = page);
+  }
 }

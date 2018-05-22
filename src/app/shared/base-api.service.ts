@@ -40,6 +40,6 @@ export abstract class BaseApiService {
     }
 
     httpOptions.body = data;
-    return this.http.request<TData>(method, `${hostUrl}/api/${url}`, httpOptions);
+    return this.http.request<TData>(method, `${hostUrl}/${url}`, httpOptions);
   }
 }
