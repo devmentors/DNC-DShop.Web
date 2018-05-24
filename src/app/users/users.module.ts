@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { UsersRoutingModule } from './users-routing.module';
-import { UsersService } from './shared/users.service';
 
 @NgModule({
   imports: [
@@ -14,6 +13,6 @@ import { UsersService } from './shared/users.service';
     UsersRoutingModule
   ],
   declarations: [SignUpComponent, SignInComponent],
-  providers: [UsersService]
+  providers: []
 })
 export class UsersModule { }

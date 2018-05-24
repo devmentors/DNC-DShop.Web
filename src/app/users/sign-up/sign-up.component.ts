@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
+import { IdentityService } from './../shared/identity.service';
 import { SignUpModel } from './sign-up.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,13 +14,19 @@ export class SignUpComponent implements OnInit {
   readonly roles: string[] = ['user', 'admin'];
   model: SignUpModel;
 
-  constructor() { }
+  constructor(
+    private identityService: IdentityService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.model = new SignUpModel();
   }
 
   signUp() {
-    alert(this.model.role);
+    this.identityService.signUp(this.model).subscribe(() => {
+      alert('Signed up');
+      this.router.navigate(['/sign-in']);
+    });
   }
 }

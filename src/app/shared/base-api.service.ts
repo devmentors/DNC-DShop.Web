@@ -18,7 +18,7 @@ const totalCountHeader = 'X-Total-Count';
 
 export abstract class BaseApiService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService, private host: string = hostUrl) {}
 
   protected get<TData>(url: string, isProtected: boolean = false): Observable<TData> {
     return this
@@ -35,13 +35,13 @@ export abstract class BaseApiService {
     }));
   }      
 
-  protected post<TData>(url: string, data: TData, isProtected: boolean = false): Observable<TData> {
+  protected post<TData>(url: string, data: any, isProtected: boolean = false): Observable<TData> {
     return this
       .request<TData>('POST', url, isProtected, data)
       .pipe(map(response => response.body));      
   }
 
-  protected put<TData>(url: string, data: TData, isProtected: boolean = false): Observable<TData> {
+  protected put<TData>(url: string, data: any, isProtected: boolean = false): Observable<TData> {
     return this
       .request<TData>('GET', url, isProtected, data)
       .pipe(map(response => response.body));      
@@ -60,6 +60,6 @@ export abstract class BaseApiService {
     }
 
     httpOptions.body = data;
-    return this.http.request<HttpResponse<TData>>(method, `${hostUrl}/${url}`, httpOptions);
+    return this.http.request<HttpResponse<TData>>(method, `${this.host}/${url}`, httpOptions);
   }
 }
