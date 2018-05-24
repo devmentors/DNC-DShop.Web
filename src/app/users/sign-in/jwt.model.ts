@@ -1,5 +1,5 @@
 export class JwtModel {
-	accsssToken: string;
+	accessToken: string;
 	refreshToken: string;
 	expires: number;
 }

@@ -8,13 +8,15 @@ import { BaseApiService } from '../../shared/base-api.service';
 import { SignUpModel } from '../sign-up/sign-up.model';
 import { JwtModel } from '../sign-in/jwt.model';
 
+const identityUrl: string = 'http://localhost:5002';
+
 @Injectable({
   providedIn: 'root'
 })
 export class IdentityService extends BaseApiService{
 
   constructor(http: HttpClient, authService: AuthService) {
-    super(http, authService, 'http://localhost:5002');
+    super(http, authService, identityUrl);
    }
 
    signUp(model: SignUpModel) : Observable<any> {

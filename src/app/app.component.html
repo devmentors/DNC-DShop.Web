@@ -10,10 +10,13 @@
         <a class="nav-link" href="#">Link</a>
       </li>
     </ul>
-    <form class="form-inline">
+    <form class="form-inline" *ngIf="! (authService.isUserLogged$ | async)">
       <button class="btn btn-outline-success mr-sm-2" routerLink="/sign-up">Sign up</button>
       <button class="btn btn-outline-success my-2 my-sm-0" routerLink="/sign-in">Sign in</button>
     </form>
+    <form class="form-inline" *ngIf="(authService.isUserLogged$ | async)">
+        <button class="btn btn-outline-success mr-sm-2" (click)="signOut()">Logout</button>
+      </form>
   </div>
 </nav>
 <div class="container mt-5">

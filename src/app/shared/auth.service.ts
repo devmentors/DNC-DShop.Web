@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 const accessTokenKey = 'access_token';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
 
+  private isUserLogged: Subject<boolean> = new BehaviorSubject<boolean>(true);
   private isSessionStored: boolean;
+  
+  isUserLogged$: Observable<boolean> = this.isUserLogged.asObservable();
+  
+  constructor() {
+      this.isSessionStored = !!window.sessionStorage.getItem(accessTokenKey)
+      this.isUserLogged.next(!!this.storage.getItem(accessTokenKey));
+  }
 
-  get storage() {
+  private get storage() {
     return this.isSessionStored ? window.sessionStorage : window.localStorage;
   }
 
   setAccessToken(accessToken: string, isSessionStored: boolean): void {
     this.isSessionStored = isSessionStored;
     this.storage.setItem(accessTokenKey, accessToken);
+    this.isUserLogged.next(true);
   }
 
   getAccessToken(): string {
@@ -24,5 +35,7 @@ export class AuthService {
 
   removeAccessToken(): void {
     this.storage.removeItem(accessTokenKey);
+    this.isUserLogged.next(false);    
   }
 }
+ 
