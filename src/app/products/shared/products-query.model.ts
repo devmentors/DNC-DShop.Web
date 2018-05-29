@@ -1,10 +1,10 @@
 export class ProductsQueryModel {
-	priceFrom: number;
-	priceTo: number;
+	priceFrom?: number;
+	priceTo?: number;
 
 	constructor(priceFrom?: number, priceTo?: number) {
-		this.priceFrom = priceFrom || 0;
-		this.priceTo = priceTo || 0;
+		this.priceFrom = priceFrom;
+		this.priceTo = priceTo;
 	}
 
 	createFromExisting(): ProductsQueryModel {

@@ -21,19 +21,19 @@ export class ProductsListComponent implements OnInit {
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
-    this.browse();
     this.query = new ProductsQueryModel();
     this.query$ = new ReplaySubject<ProductsQueryModel>();
     this.subscribeToQuery();
+    this.browse(this.query);
   }
 
   queryChanged() {
     this.query$.next(this.query.createFromExisting());
   }
 
-  browse() {
+  browse(query: ProductsQueryModel) {
     this.productsService
-      .browse()
+      .browse(query)
       .subscribe(page => this.productsPage = page);
   }
 
@@ -46,6 +46,6 @@ export class ProductsListComponent implements OnInit {
             && prev.priceTo === curr.priceTo;
       })
     )
-    .subscribe(() => this.browse());
+    .subscribe((query) => this.browse(query));
   }
 }

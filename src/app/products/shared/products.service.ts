@@ -6,6 +6,7 @@ import { AuthService } from './../../shared/auth.service';
 import { ProductModel } from './product.model';
 import { BaseApiService } from '../../shared/base-api.service';
 import { PagedResult } from '../../shared/paged-result';
+import { ProductsQueryModel } from './products-query.model';
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class ProductsService extends BaseApiService {
     super(http, authService);
   }
 
-  browse() : Observable<PagedResult<ProductModel>> {
-    return super.pagedResult<ProductModel>('products', false);
+  browse(query: ProductsQueryModel) : Observable<PagedResult<ProductModel>> {
+    return super.pagedResult<ProductModel>('products', false, query);
   }
 }
