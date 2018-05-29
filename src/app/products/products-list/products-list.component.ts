@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
+import { Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import { ProductsQueryModel } from './../shared/products-query.model';
 import { PagedResult } from './../../shared/paged-result';
 import { ProductModel } from '../shared/product.model';
 import { ProductsService } from './../shared/products.service';
@@ -11,17 +14,38 @@ import { ProductsService } from './../shared/products.service';
 })
 export class ProductsListComponent implements OnInit {
 
+  query: ProductsQueryModel;
+  query$: Subject<ProductsQueryModel>;
   productsPage: PagedResult<ProductModel>;
 
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
     this.browse();
+    this.query = new ProductsQueryModel();
+    this.query$ = new ReplaySubject<ProductsQueryModel>();
+    this.subscribeToQuery();
+  }
+
+  queryChanged() {
+    this.query$.next(this.query.createFromExisting());
   }
 
   browse() {
     this.productsService
       .browse()
       .subscribe(page => this.productsPage = page);
+  }
+
+  private subscribeToQuery() {
+    this.query$
+    .pipe(
+      debounceTime(400),
+      distinctUntilChanged((prev, curr) => { 
+        return prev.priceFrom === curr.priceFrom 
+            && prev.priceTo === curr.priceTo;
+      })
+    )
+    .subscribe(() => this.browse());
   }
 }

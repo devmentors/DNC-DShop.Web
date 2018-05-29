@@ -1,7 +1,7 @@
 export class ProductModel {
   id: string;
   name: string;
-  description: string;
+  descirption: string;
   vendor: string;
   price: number;
 }

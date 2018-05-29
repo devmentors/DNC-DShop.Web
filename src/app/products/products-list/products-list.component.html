@@ -1,6 +1,21 @@
+<div class="row">  
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="products-list-filter-price-from">Price from:</label>
+        <input type="number" class="form-control" id="products-list-filter-price-from" [(ngModel)]="query.priceFrom" (keyup)="queryChanged()" name="priceFrom" placeholder="Price from">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="products-list-filter-price-from">Price to:</label>
+        <input type="number" class="form-control" id="products-list-filter-price-from" [(ngModel)]="query.priceTo" (keyup)="queryChanged()" name="priceTo" placeholder="Price to">
+      </div>
+    </div> 
+</div>
+<hr>
 <div class="row" *ngIf="productsPage">
   <div class="col-md-4 mb-5" *ngFor="let product of productsPage.items">
-      <div class="card" style="width: 18rem;">
+      <div class="card">
           <img class="card-img-top" src="https://cdn.cultofmac.com/wp-content/uploads/2017/03/iPhone-7-red-1-780x466.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{product.name}}</h5>

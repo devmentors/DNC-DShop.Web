@@ -9,14 +9,13 @@ const accessTokenKey = 'access_token';
 })
 export class AuthService{
 
-  private isUserLogged: Subject<boolean> = new BehaviorSubject<boolean>(true);
-  private isSessionStored: boolean;
+  isUserLogged$: Subject<boolean> = new BehaviorSubject<boolean>(true);
   
-  isUserLogged$: Observable<boolean> = this.isUserLogged.asObservable();
+  private isSessionStored: boolean;
   
   constructor() {
       this.isSessionStored = !!window.sessionStorage.getItem(accessTokenKey)
-      this.isUserLogged.next(!!this.storage.getItem(accessTokenKey));
+      this.isUserLogged$.next(!!this.storage.getItem(accessTokenKey));
   }
 
   private get storage() {
@@ -26,7 +25,7 @@ export class AuthService{
   setAccessToken(accessToken: string, isSessionStored: boolean): void {
     this.isSessionStored = isSessionStored;
     this.storage.setItem(accessTokenKey, accessToken);
-    this.isUserLogged.next(true);
+    this.isUserLogged$.next(true);
   }
 
   getAccessToken(): string {
@@ -35,7 +34,7 @@ export class AuthService{
 
   removeAccessToken(): void {
     this.storage.removeItem(accessTokenKey);
-    this.isUserLogged.next(false);    
+    this.isUserLogged$.next(false);    
   }
 }
  
