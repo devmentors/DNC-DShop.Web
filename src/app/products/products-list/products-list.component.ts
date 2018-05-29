@@ -22,7 +22,7 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit() {
     this.query = new ProductsQueryModel();
-    this.query$ = new ReplaySubject<ProductsQueryModel>();
+    this.query$ = new Subject<ProductsQueryModel>();
     this.subscribeToQuery();
     this.browse(this.query);
   }

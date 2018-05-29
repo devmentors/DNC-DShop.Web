@@ -3,8 +3,8 @@ export class ProductsQueryModel {
 	priceTo?: number;
 
 	constructor(priceFrom?: number, priceTo?: number) {
-		this.priceFrom = priceFrom;
-		this.priceTo = priceTo;
+		this.priceFrom = priceFrom || null;
+		this.priceTo = priceTo || null;
 	}
 
 	createFromExisting(): ProductsQueryModel {
