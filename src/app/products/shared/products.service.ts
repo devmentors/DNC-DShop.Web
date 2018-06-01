@@ -19,6 +19,6 @@ export class ProductsService extends BaseApiService {
   }
 
   browse(query: ProductsQueryModel) : Observable<PagedResult<ProductModel>> {
-    return super.pagedResult<ProductModel>('products', false, query);
+    return super.pagedResult<ProductModel>('products', query, false);
   }
 }

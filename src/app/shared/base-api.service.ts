@@ -21,15 +21,15 @@ export abstract class BaseApiService {
 
   constructor(private http: HttpClient, private authService: AuthService, private host: string = hostUrl) {}
 
-  protected get<TData>(url: string, isProtected: boolean = false, params?: any): Observable<TData> {
+  protected get<TData>(url: string, params?: any, isProtected: boolean = false): Observable<TData> {
     return this
-      .request<TData>('GET', url, isProtected, null, params)
+      .request<TData>('GET', url, null, params, isProtected)
       .pipe(map(response => response.body));      
   }
 
-  protected pagedResult<TData>(url: string, isProtected: boolean = false, params?: any): Observable<PagedResult<TData>> {
+  protected pagedResult<TData>(url: string, params?: any, isProtected: boolean = false): Observable<PagedResult<TData>> {
     return this
-    .request<TData[]>('GET', url, isProtected, null, params)
+    .request<TData[]>('GET', url, null, params, isProtected)
     .pipe(map(response => { 
       const totalResults = <number> JSON.parse(response.headers.get(totalCountHeader));
       return new PagedResult(totalResults, response.body);
@@ -38,23 +38,23 @@ export abstract class BaseApiService {
 
   protected post<TData>(url: string, data: any, isProtected: boolean = false): Observable<TData> {
     return this
-      .request<TData>('POST', url, isProtected, data)
+      .request<TData>('POST', url, data, null, isProtected)
       .pipe(map(response => response.body));      
   }
 
   protected put<TData>(url: string, data: any, isProtected: boolean = false): Observable<TData> {
     return this
-      .request<TData>('GET', url, isProtected, data)
+      .request<TData>('GET', url, data, null, isProtected)
       .pipe(map(response => response.body));      
   }
 
   protected delete<TData>(url: string, isProtected: boolean = false): Observable<TData> {
     return this
-      .request<TData>('GET', url, isProtected)
+      .request<TData>('GET', url, null, null, isProtected)
       .pipe(map(response => response.body));
   }
 
-  private request<TData>(method: string, url: string, isProtected: boolean, data?: TData, params? : any): Observable<HttpResponse<TData>> {
+  private request<TData>(method: string, url: string, data?: TData, params? : any, isProtected: boolean = false): Observable<HttpResponse<TData>> {
     if (isProtected) {
       const token = this.authService.getAccessToken();
       httpOptions.headers.append('Authorization', token);
